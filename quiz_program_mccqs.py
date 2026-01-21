@@ -53,3 +53,9 @@ else:
 # Final Score
 print("Quiz Finished!")
 print("Your final score is:", score, "/ 3")
+
+choice = input("Enter q to quit: ")
+
+if choice == "q":
+    print("Game ended.")
+    exit()
