@@ -1,4 +1,4 @@
-# Variables (example values — you can change them)
+# Variables (example values, you can change them)
 distance_mi = 9
 is_raining = True
 has_bike = False
