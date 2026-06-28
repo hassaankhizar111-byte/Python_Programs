@@ -14,4 +14,4 @@ def number_pattern(n):
     
     # Return the numbers joined by a space
     return " ".join(pattern_list)
-print(number_pattern(5))
+print(number_pattern(9))

@@ -1,9 +1,9 @@
-first_name = 'John'
-last_name = 'Doe'
+first_name = input("Enter your First name: ")
+last_name = input("Enter your Last name: ")
 full_name = first_name + ' ' + last_name
-address = '123 Main Street'
+address = input("Enter your correct Address: ")
 address += ', Apartment 4B'
-employee_age = 28
+employee_age = input("Enter you age: ")
 employee_info = full_name + ' is ' + str(employee_age) + ' years old'
 print(employee_info)
 years_experience = 5
