@@ -30,6 +30,7 @@
 #         break  # End the game since they won
 import json
 import random
+import os
 
 
 class InvalidGuessRange(Exception):
@@ -60,24 +61,38 @@ class GuessingGame:
     def is_game_over(self):
         return self.attempts >= self.max_attempts
 
-    def save_result(self, filename="game_results.json"):
+    def save_result(self):
+        # Always save next to this Python file
+        filename = os.path.join(os.path.dirname(__file__), "game_results.json")
+
         result = {
             "secret_number": self.secret_number,
             "total_attempts": self.attempts,
             "guess_history": self.history,
             "won": self.secret_number in self.history,
         }
+
         with open(filename, "w") as f:
             json.dump(result, f, indent=4)
+
         print(f"Game saved to {filename}")
 
-    def load_last_result(self, filename="game_results.json"):
+    def load_last_result(self):
+        # Always load from next to this Python file
+        filename = os.path.join(os.path.dirname(__file__), "game_results.json")
+
         try:
             with open(filename, "r") as f:
                 data = json.load(f)
-            print(f"Last game: {data['total_attempts']} attempts | Won: {data['won']}")
+
+            print(
+                f"Last game: {data['total_attempts']} attempts | "
+                f"Won: {data['won']}"
+            )
+
         except FileNotFoundError:
             print("No previous game found. Starting fresh.")
+
         except json.JSONDecodeError:
             print("Save file corrupted. Starting fresh.")
 
@@ -87,7 +102,9 @@ game = GuessingGame(max_attempts=7)
 game.load_last_result()
 
 while not game.is_game_over():
-    user_input = input("Guess a number between 1 and 100 (or 'quit'): ").strip().lower()
+    user_input = input(
+        "Guess a number between 1 and 100 (or 'quit'): "
+    ).strip().lower()
 
     if user_input == "quit":
         print(f"The number was {game.secret_number}.")
@@ -95,6 +112,7 @@ while not game.is_game_over():
 
     try:
         guess = int(user_input)
+
     except ValueError:
         print("Invalid input. Numbers only.")
         continue
@@ -102,8 +120,10 @@ while not game.is_game_over():
     try:
         feedback = game.make_guess(guess)
         print(feedback)
+
         if "Correct" in feedback:
             break
+
     except InvalidGuessRange as e:
         print(f"Range error: {e}")
 
