@@ -1,0 +1,8 @@
+{
+    "secret_number": 75,
+    "total_attempts": 1,
+    "guess_history": [
+        55
+    ],
+    "won": false
+}
